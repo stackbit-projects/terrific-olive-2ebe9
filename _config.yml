@@ -1,0 +1,47 @@
+future: true
+name: Radek
+auto: false
+baseurl: /kontent-jekyll-blog
+sass:
+  style: compact # possible values: nested expanded compact compressed
+exclude:
+  - regen
+  - sample-content
+  - initialize-content.rb
+  - README.md
+  - LICENSE
+  - KK_sample_content
+plugins:
+  - kontent-jekyll
+  - jekyll-redirect-from
+permalink: /:collection/:name
+kentico:
+  project_id: ENV_PROJECT_ID
+  front_matter_resolver: FrontMatterResolver
+  filename_resolver: FilenameResolver
+  data_resolver: DataResolver
+  content_link_resolver: ContentLinkResolver
+  inline_content_item_resolver: InlineContentItemResolver
+  custom_site_processor: CustomSiteProcessor
+  max_linked_items_depth: 5
+  default_layout: default
+  languages:
+    - en-US
+    - en-GB
+  posts:
+    type: blog_post
+    layout: post
+    date: published
+    tags: post_tags
+    categories: post_categories
+  pages:
+    page:
+      layout: page
+    author:
+      layout: author
+      title: name
+      collection: authors
+  taxonomies:
+   - content
+   - post_categories
+   - post_tags

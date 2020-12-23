@@ -1,0 +1,14 @@
+.authors {
+  > article {
+    display: flex;
+
+    img {
+      flex: 1;
+      margin: 2rem auto;
+    }
+
+    img + * {
+      flex: 3;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+---
+layout: default
+---
+{% assign authors = site.authors | where_exp: 'author', 'author.item.system.language == page.language' %}
+
+<main class="authors">
+    <h1>Our authors</h1>
+
+    {% for author in authors %}
+        {% assign elements = author.item.elements %}
+        {% assign age = elements.date_of_birth.value | calculate_age %}
+        {% assign posts = site.posts | where_exp: 'post', 'post.item.system.language == page.language' | where_exp: 'post', 'post.item.elements.authors.value contains author.item.system.codename' %}
+        <article class="main-item">
+            <img src="{{ elements.avatar.value[0].url }}" alt="Avatar of {{ elements.name.value }}">
+
+            <section>
+                <h2><a href="{{ author.url | relative_url }}">{{ elements.name.value }}</a></h2>
+
+                <p>{{ elements.about.value }}</p>
+                <p>
+                    <span>{{ 'year' | pluralize: age }}</span>
+                    <span>{{ elements.location.value }}</span>
+                    <span>{{ 'post' | pluralize: posts.size }}</span>
+                </p>
+            </section>
+        </article>
+    {% endfor %}
+</main>

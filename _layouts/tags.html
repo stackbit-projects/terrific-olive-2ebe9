@@ -1,0 +1,15 @@
+---
+layout: default
+---
+
+<main>
+    <h1>{{ page.taxonomy_group.system.name }}</h1>
+
+{% for tag in page.taxonomy_group.terms %}
+    {% assign posts = site.posts | where_exp: 'post', 'post.tags contains tag.codename' %}
+
+    <div>
+        <strong>{% include tag_link.html language=page.language tag=tag %}</strong>
+        ({{ posts.size }} posts)</div>
+{% endfor %}
+</main>
